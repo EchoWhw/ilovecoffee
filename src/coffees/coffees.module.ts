@@ -8,6 +8,6 @@ import { Flavor } from '../-coffees/entities/flavor.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Coffee, Flavor])],
   controllers: [CoffeesController],
-  providers: [CoffeesService]
+  providers: [CoffeesService],
 })
 export class CoffeesModule {}
