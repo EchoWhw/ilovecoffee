@@ -10,12 +10,22 @@ exports.CoffeeRatingModule = void 0;
 var common_1 = require("@nestjs/common");
 var coffee_rating_service_1 = require("./coffee-rating.service");
 var coffees_module_1 = require("../coffees/coffees.module");
+var database_module_1 = require("../database/database.module");
 var CoffeeRatingModule = /** @class */ (function () {
     function CoffeeRatingModule() {
     }
     CoffeeRatingModule = __decorate([
         (0, common_1.Module)({
-            imports: [coffees_module_1.CoffeesModule],
+            imports: [
+                database_module_1.DatabaseModule.register({
+                    type: 'postgres',
+                    username: 'postgres',
+                    host: 'localhost',
+                    password: 'admin',
+                    port: 5432,
+                }),
+                coffees_module_1.CoffeesModule,
+            ],
             providers: [coffee_rating_service_1.CoffeeRatingService],
         })
     ], CoffeeRatingModule);

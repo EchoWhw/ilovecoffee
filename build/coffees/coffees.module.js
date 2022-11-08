@@ -109,6 +109,7 @@ var CoffeesModule = /** @class */ (function () {
                             }
                         });
                     }); },
+                    scope: common_1.Scope.TRANSIENT,
                     inject: [typeorm_2.Connection],
                     //   (brandsFactory: CoffeeBrandsFactory) =>
                     //   brandsFactory.create(),

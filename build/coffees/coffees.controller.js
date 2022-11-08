@@ -18,9 +18,12 @@ var _coffees_service_1 = require("../-coffees/-coffees.service");
 var create_coffee_dto_1 = require("./dto/create-coffee.dto");
 var update_coffee_dto_1 = require("./dto/update-coffee.dto");
 var pagination_query_dto_1 = require("../common/dto/pagination-query.dto");
+var core_1 = require("@nestjs/core");
 var CoffeesController = /** @class */ (function () {
-    function CoffeesController(coffeesService) {
+    function CoffeesController(coffeesService, request) {
         this.coffeesService = coffeesService;
+        this.request = request;
+        console.log('CoffeeController created');
     }
     CoffeesController.prototype.findAll = function (paginationQuery) {
         // const {limit, offset} = paginationQuery
@@ -82,7 +85,8 @@ var CoffeesController = /** @class */ (function () {
     ], CoffeesController.prototype, "remove", null);
     CoffeesController = __decorate([
         (0, common_1.Controller)('coffees'),
-        __metadata("design:paramtypes", [_coffees_service_1.CoffeesService])
+        __param(1, (0, common_1.Inject)(core_1.REQUEST)),
+        __metadata("design:paramtypes", [_coffees_service_1.CoffeesService, Object])
     ], CoffeesController);
     return CoffeesController;
 }());

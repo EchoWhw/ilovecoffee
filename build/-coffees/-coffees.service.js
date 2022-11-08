@@ -72,7 +72,7 @@ var CoffeesService = /** @class */ (function () {
         this.coffeeRepository = coffeeRepository;
         this.flavorRepository = flavorRepository;
         this.connection = connection;
-        console.log(coffeeBrands);
+        console.log('CoffeesService instantiated');
     }
     CoffeesService.prototype.findAll = function (paginationQuery) {
         var offset = paginationQuery.offset, limit = paginationQuery.limit;
@@ -220,7 +220,7 @@ var CoffeesService = /** @class */ (function () {
         });
     };
     CoffeesService = __decorate([
-        (0, common_1.Injectable)(),
+        (0, common_1.Injectable)({ scope: common_1.Scope.REQUEST }),
         __param(0, (0, typeorm_1.InjectRepository)(coffee_entity_1.Coffee)),
         __param(1, (0, typeorm_1.InjectRepository)(flavor_entity_1.Flavor)),
         __param(3, (0, common_1.Inject)(coffees_constants_1.COFFEE_BRANDS)),

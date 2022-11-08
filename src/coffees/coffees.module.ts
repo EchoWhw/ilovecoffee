@@ -1,4 +1,4 @@
-import { Injectable, Module } from '@nestjs/common';
+import { Injectable, Module, Scope } from '@nestjs/common';
 import { CoffeesService } from '../-coffees/-coffees.service';
 import { CoffeesController } from './coffees.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -38,6 +38,7 @@ class ProductionConfigService {}
         console.log('[!] Async factory');
         return coffeeBrands;
       },
+      scope: Scope.TRANSIENT,
       inject: [Connection],
       //   (brandsFactory: CoffeeBrandsFactory) =>
       //   brandsFactory.create(),
