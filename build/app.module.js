@@ -16,13 +16,21 @@ var typeorm_1 = require("@nestjs/typeorm");
 var coffee_rating_module_1 = require("./coffee-rating/coffee-rating.module");
 var database_module_1 = require("./database/database.module");
 var config_1 = require("@nestjs/config");
+var Joi = require("@hapi/joi");
+var app_config_1 = require("./config/app.config");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         (0, common_1.Module)({
             imports: [
-                config_1.ConfigModule.forRoot(),
+                config_1.ConfigModule.forRoot({
+                    load: [app_config_1.default],
+                    validationSchema: Joi.object({
+                        DATABASE_HOST: Joi.required(),
+                        DATABASE_PORT: Joi.number().default(5432),
+                    }),
+                }),
                 coffees_module_1.CoffeesModule,
                 typeorm_1.TypeOrmModule.forRoot({
                     type: 'postgres',

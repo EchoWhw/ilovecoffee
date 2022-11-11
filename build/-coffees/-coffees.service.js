@@ -67,12 +67,15 @@ var coffee_entity_1 = require("../-coffees/entities/coffee.entity");
 var flavor_entity_1 = require("./entities/flavor.entity");
 var event_entity_1 = require("../events/entities/event.entity");
 var coffees_constants_1 = require("../coffees/coffees.constants");
+var config_1 = require("@nestjs/config");
 var CoffeesService = /** @class */ (function () {
-    function CoffeesService(coffeeRepository, flavorRepository, connection, coffeeBrands) {
+    function CoffeesService(coffeeRepository, flavorRepository, connection, configService, coffeeBrands) {
         this.coffeeRepository = coffeeRepository;
         this.flavorRepository = flavorRepository;
         this.connection = connection;
-        console.log('CoffeesService instantiated');
+        this.configService = configService;
+        var databaseHost = this.configService.get('database.host', 'localhost');
+        console.log(databaseHost);
     }
     CoffeesService.prototype.findAll = function (paginationQuery) {
         var offset = paginationQuery.offset, limit = paginationQuery.limit;
@@ -223,10 +226,11 @@ var CoffeesService = /** @class */ (function () {
         (0, common_1.Injectable)({ scope: common_1.Scope.REQUEST }),
         __param(0, (0, typeorm_1.InjectRepository)(coffee_entity_1.Coffee)),
         __param(1, (0, typeorm_1.InjectRepository)(flavor_entity_1.Flavor)),
-        __param(3, (0, common_1.Inject)(coffees_constants_1.COFFEE_BRANDS)),
+        __param(4, (0, common_1.Inject)(coffees_constants_1.COFFEE_BRANDS)),
         __metadata("design:paramtypes", [typeorm_2.Repository,
             typeorm_2.Repository,
-            typeorm_2.Connection, Array])
+            typeorm_2.Connection,
+            config_1.ConfigService, Array])
     ], CoffeesService);
     return CoffeesService;
 }());
