@@ -53,6 +53,7 @@ var event_entity_1 = require("../events/entities/event.entity");
 var coffees_constants_1 = require("./coffees.constants");
 var typeorm_2 = require("typeorm");
 var config_1 = require("@nestjs/config");
+var coffees_config_1 = require("../-coffees/config/coffees.config");
 var CoffeeBrandsFactory = /** @class */ (function () {
     function CoffeeBrandsFactory() {
     }
@@ -85,7 +86,10 @@ var CoffeesModule = /** @class */ (function () {
     }
     CoffeesModule = __decorate([
         (0, common_1.Module)({
-            imports: [typeorm_1.TypeOrmModule.forFeature([coffee_entity_1.Coffee, flavor_entity_1.Flavor, event_entity_1.Event]), config_1.ConfigModule],
+            imports: [
+                typeorm_1.TypeOrmModule.forFeature([coffee_entity_1.Coffee, flavor_entity_1.Flavor, event_entity_1.Event]),
+                config_1.ConfigModule.forFeature(coffees_config_1.default),
+            ],
             controllers: [coffees_controller_1.CoffeesController],
             providers: [
                 _coffees_service_1.CoffeesService,

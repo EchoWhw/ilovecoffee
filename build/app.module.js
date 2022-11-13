@@ -18,12 +18,26 @@ var database_module_1 = require("./database/database.module");
 var config_1 = require("@nestjs/config");
 var Joi = require("@hapi/joi");
 var app_config_1 = require("./config/app.config");
+var core_1 = require("@nestjs/core");
+var common_module_1 = require("./common/common.module");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         (0, common_1.Module)({
             imports: [
+                typeorm_1.TypeOrmModule.forRootAsync({
+                    useFactory: function () { return ({
+                        type: 'postgres',
+                        host: process.env.DATABASE_HOST,
+                        port: +process.env.DATABASE_PORT,
+                        username: process.env.DATABASE_USER,
+                        password: process.env.DATABASE_PASSWORD,
+                        database: process.env.DATABASE_NAME,
+                        autoLoadEntities: true,
+                        synchronize: true,
+                    }); },
+                }),
                 config_1.ConfigModule.forRoot({
                     load: [app_config_1.default],
                     validationSchema: Joi.object({
@@ -32,21 +46,18 @@ var AppModule = /** @class */ (function () {
                     }),
                 }),
                 coffees_module_1.CoffeesModule,
-                typeorm_1.TypeOrmModule.forRoot({
-                    type: 'postgres',
-                    host: process.env.DATABASE_HOST,
-                    port: +process.env.DATABASE_PORT,
-                    username: process.env.DATABASE_USER,
-                    password: process.env.DATABASE_PASSWORD,
-                    database: process.env.DATABASE_NAME,
-                    autoLoadEntities: true,
-                    synchronize: true,
-                }),
                 coffee_rating_module_1.CoffeeRatingModule,
                 database_module_1.DatabaseModule,
+                common_module_1.CommonModule,
             ],
             controllers: [app_controller_1.AppController, notestcoffee_controller_1.NotestcoffeeController],
-            providers: [app_service_1.AppService],
+            providers: [
+                app_service_1.AppService,
+                {
+                    provide: core_1.APP_PIPE,
+                    useClass: common_1.ValidationPipe,
+                },
+            ],
         })
     ], AppModule);
     return AppModule;

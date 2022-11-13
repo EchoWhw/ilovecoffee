@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var common_1 = require("@nestjs/common");
 var core_1 = require("@nestjs/core");
 var app_module_1 = require("./app.module");
+var http_exception_filter_1 = require("./common/filters/http-exception.filter");
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function () {
         var app, e_1;
@@ -55,6 +56,7 @@ function bootstrap() {
                             enableImplicitConversion: true,
                         },
                     }));
+                    app.useGlobalFilters(new http_exception_filter_1.HttpExceptionFilter());
                     _a.label = 2;
                 case 2:
                     _a.trys.push([2, 4, , 5]);

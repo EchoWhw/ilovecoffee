@@ -19,6 +19,8 @@ var create_coffee_dto_1 = require("./dto/create-coffee.dto");
 var update_coffee_dto_1 = require("./dto/update-coffee.dto");
 var pagination_query_dto_1 = require("../common/dto/pagination-query.dto");
 var core_1 = require("@nestjs/core");
+var common_2 = require("@nestjs/common");
+var public_decorator_1 = require("../common/decorators/public.decorator");
 var CoffeesController = /** @class */ (function () {
     function CoffeesController(coffeesService, request) {
         this.coffeesService = coffeesService;
@@ -48,6 +50,7 @@ var CoffeesController = /** @class */ (function () {
         return this.coffeesService.remove(id);
     };
     __decorate([
+        (0, public_decorator_1.Public)(),
         (0, common_1.Get)(),
         __param(0, (0, common_1.Query)()),
         __metadata("design:type", Function),
@@ -71,7 +74,7 @@ var CoffeesController = /** @class */ (function () {
     __decorate([
         (0, common_1.Patch)(':id'),
         __param(0, (0, common_1.Param)('id')),
-        __param(1, (0, common_1.Body)()),
+        __param(1, (0, common_1.Body)(common_2.ValidationPipe)),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [String, update_coffee_dto_1.UpdateCoffeeDto]),
         __metadata("design:returntype", void 0)
@@ -84,6 +87,7 @@ var CoffeesController = /** @class */ (function () {
         __metadata("design:returntype", void 0)
     ], CoffeesController.prototype, "remove", null);
     CoffeesController = __decorate([
+        (0, common_1.UsePipes)(common_2.ValidationPipe),
         (0, common_1.Controller)('coffees'),
         __param(1, (0, common_1.Inject)(core_1.REQUEST)),
         __metadata("design:paramtypes", [_coffees_service_1.CoffeesService, Object])
