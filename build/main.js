@@ -40,6 +40,8 @@ var common_1 = require("@nestjs/common");
 var core_1 = require("@nestjs/core");
 var app_module_1 = require("./app.module");
 var http_exception_filter_1 = require("./common/filters/http-exception.filter");
+var wrap_response_interceptor_1 = require("./common/interceptors/wrap-response.interceptor");
+var timeout_interceptor_1 = require("./common/interceptors/timeout.interceptor");
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function () {
         var app, e_1;
@@ -57,6 +59,7 @@ function bootstrap() {
                         },
                     }));
                     app.useGlobalFilters(new http_exception_filter_1.HttpExceptionFilter());
+                    app.useGlobalInterceptors(new wrap_response_interceptor_1.WrapResponseInterceptor(), new timeout_interceptor_1.TimeoutInterceptor());
                     _a.label = 2;
                 case 2:
                     _a.trys.push([2, 4, , 5]);

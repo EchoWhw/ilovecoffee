@@ -19,6 +19,8 @@ import { REQUEST } from '@nestjs/core';
 import { Request } from 'express';
 import { ValidationPipe } from '@nestjs/common';
 import { Public } from '../common/decorators/public.decorator';
+import { resolve } from 'path';
+import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 
 @UsePipes(ValidationPipe)
 @Controller('coffees')
@@ -32,15 +34,16 @@ export class CoffeesController {
 
   @Public()
   @Get()
-  findAll(@Query() paginationQuery: PaginationQueryDto) {
+  async findAll(@Query() paginationQuery: PaginationQueryDto) {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     // const {limit, offset} = paginationQuery
     return this.coffeesService.findAll(paginationQuery);
     // return `this action return all coffees. Limit: ${limit}, offset: ${offset}`;
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
-    console.log(typeof id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    console.log(id);
     return this.coffeesService.findOne('' + id);
     // return `this action return #${id} coffee`;
   }
