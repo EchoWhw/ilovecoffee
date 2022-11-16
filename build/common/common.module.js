@@ -11,9 +11,15 @@ var common_1 = require("@nestjs/common");
 var core_1 = require("@nestjs/core");
 var api_key_guard_1 = require("./guards/api-key.guard");
 var config_1 = require("@nestjs/config");
+var logging_middleware_1 = require("./middleware/logging.middleware");
 var CommonModule = /** @class */ (function () {
     function CommonModule() {
     }
+    CommonModule.prototype.configure = function (consumer) {
+        consumer
+            .apply(logging_middleware_1.LoggingMiddleware)
+            .forRoutes({ path: 'coffees', method: common_1.RequestMethod.GET });
+    };
     CommonModule = __decorate([
         (0, common_1.Module)({
             imports: [config_1.ConfigModule],
