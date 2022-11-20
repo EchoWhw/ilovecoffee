@@ -16,14 +16,18 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateCoffeeDto = void 0;
-var mapped_types_1 = require("@nestjs/mapped-types");
+var openapi = require("@nestjs/swagger");
+var swagger_1 = require("@nestjs/swagger");
 var create_coffee_dto_1 = require("./create-coffee.dto");
 var UpdateCoffeeDto = /** @class */ (function (_super) {
     __extends(UpdateCoffeeDto, _super);
     function UpdateCoffeeDto() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    UpdateCoffeeDto._OPENAPI_METADATA_FACTORY = function () {
+        return {};
+    };
     return UpdateCoffeeDto;
-}((0, mapped_types_1.PartialType)(create_coffee_dto_1.CreateCoffeeDto)));
+}((0, swagger_1.PartialType)(create_coffee_dto_1.CreateCoffeeDto)));
 exports.UpdateCoffeeDto = UpdateCoffeeDto;
 //# sourceMappingURL=update-coffee.dto.js.map

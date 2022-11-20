@@ -10,11 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Flavor = void 0;
+var openapi = require("@nestjs/swagger");
 var typeorm_1 = require("typeorm");
 var coffee_entity_1 = require("./coffee.entity");
 var Flavor = /** @class */ (function () {
     function Flavor() {
     }
+    Flavor._OPENAPI_METADATA_FACTORY = function () {
+        return { id: { required: true, type: function () { return Number; } }, name: { required: true, type: function () { return String; } }, coffees: { required: true, type: function () { return [require("./coffee.entity").Coffee]; } } };
+    };
     __decorate([
         (0, typeorm_1.PrimaryGeneratedColumn)(),
         __metadata("design:type", Number)

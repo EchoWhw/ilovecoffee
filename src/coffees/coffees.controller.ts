@@ -21,6 +21,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { Public } from '../common/decorators/public.decorator';
 import { resolve } from 'path';
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
+import { Protocol } from '../common/decorators/protocol.decorator';
 
 @UsePipes(ValidationPipe)
 @Controller('coffees')
@@ -35,9 +36,13 @@ export class CoffeesController {
   @Public()
   @Get()
   // async
-  findAll(@Query() paginationQuery: PaginationQueryDto) {
+  findAll(
+    @Protocol('https') protocol: string,
+    @Query() paginationQuery: PaginationQueryDto,
+  ) {
     // await new Promise((resolve) => setTimeout(resolve, 5000));
     // const {limit, offset} = paginationQuery
+    console.log(protocol);
     return this.coffeesService.findAll(paginationQuery);
     // return `this action return all coffees. Limit: ${limit}, offset: ${offset}`;
   }

@@ -10,10 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCoffeeDto = void 0;
+var openapi = require("@nestjs/swagger");
 var class_validator_1 = require("class-validator");
 var CreateCoffeeDto = /** @class */ (function () {
     function CreateCoffeeDto() {
     }
+    CreateCoffeeDto._OPENAPI_METADATA_FACTORY = function () {
+        return { name: { required: true, type: function () { return String; } }, brand: { required: true, type: function () { return String; } }, flavors: { required: true, type: function () { return [String]; } } };
+    };
     __decorate([
         (0, class_validator_1.IsString)(),
         __metadata("design:type", String)

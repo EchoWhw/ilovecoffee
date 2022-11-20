@@ -10,10 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaginationQueryDto = void 0;
+var openapi = require("@nestjs/swagger");
 var class_validator_1 = require("class-validator");
 var PaginationQueryDto = /** @class */ (function () {
     function PaginationQueryDto() {
     }
+    PaginationQueryDto._OPENAPI_METADATA_FACTORY = function () {
+        return { limit: { required: true, type: function () { return Number; }, minimum: 1 }, offset: { required: true, type: function () { return Number; }, minimum: 1 } };
+    };
     __decorate([
         (0, class_validator_1.IsOptional)(),
         (0, class_validator_1.IsPositive)(),

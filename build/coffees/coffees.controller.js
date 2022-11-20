@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CoffeesController = void 0;
+var openapi = require("@nestjs/swagger");
 var common_1 = require("@nestjs/common");
 var _coffees_service_1 = require("../-coffees/-coffees.service");
 var create_coffee_dto_1 = require("./dto/create-coffee.dto");
@@ -22,6 +23,7 @@ var core_1 = require("@nestjs/core");
 var common_2 = require("@nestjs/common");
 var public_decorator_1 = require("../common/decorators/public.decorator");
 var parse_int_pipe_1 = require("../common/pipes/parse-int.pipe");
+var protocol_decorator_1 = require("../common/decorators/protocol.decorator");
 var CoffeesController = /** @class */ (function () {
     function CoffeesController(coffeesService, request) {
         this.coffeesService = coffeesService;
@@ -29,9 +31,10 @@ var CoffeesController = /** @class */ (function () {
         console.log('CoffeeController created');
     }
     // async
-    CoffeesController.prototype.findAll = function (paginationQuery) {
+    CoffeesController.prototype.findAll = function (protocol, paginationQuery) {
         // await new Promise((resolve) => setTimeout(resolve, 5000));
         // const {limit, offset} = paginationQuery
+        console.log(protocol);
         return this.coffeesService.findAll(paginationQuery);
         // return `this action return all coffees. Limit: ${limit}, offset: ${offset}`;
     };
@@ -54,14 +57,19 @@ var CoffeesController = /** @class */ (function () {
     };
     __decorate([
         (0, public_decorator_1.Public)(),
-        (0, common_1.Get)(),
-        __param(0, (0, common_1.Query)()),
+        (0, common_1.Get)()
+        // async
+        ,
+        openapi.ApiResponse({ status: 200, type: [require("../-coffees/entities/coffee.entity").Coffee] }),
+        __param(0, (0, protocol_decorator_1.Protocol)('https')),
+        __param(1, (0, common_1.Query)()),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [pagination_query_dto_1.PaginationQueryDto]),
+        __metadata("design:paramtypes", [String, pagination_query_dto_1.PaginationQueryDto]),
         __metadata("design:returntype", void 0)
     ], CoffeesController.prototype, "findAll", null);
     __decorate([
         (0, common_1.Get)(':id'),
+        openapi.ApiResponse({ status: 200, type: require("../-coffees/entities/coffee.entity").Coffee }),
         __param(0, (0, common_1.Param)('id', parse_int_pipe_1.ParseIntPipe)),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Number]),
@@ -69,6 +77,7 @@ var CoffeesController = /** @class */ (function () {
     ], CoffeesController.prototype, "findOne", null);
     __decorate([
         (0, common_1.Post)(),
+        openapi.ApiResponse({ status: 201, type: require("../-coffees/entities/coffee.entity").Coffee }),
         __param(0, (0, common_1.Body)()),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [create_coffee_dto_1.CreateCoffeeDto]),
@@ -76,6 +85,7 @@ var CoffeesController = /** @class */ (function () {
     ], CoffeesController.prototype, "create", null);
     __decorate([
         (0, common_1.Patch)(':id'),
+        openapi.ApiResponse({ status: 200, type: require("../-coffees/entities/coffee.entity").Coffee }),
         __param(0, (0, common_1.Param)('id')),
         __param(1, (0, common_1.Body)(common_2.ValidationPipe)),
         __metadata("design:type", Function),
@@ -84,6 +94,7 @@ var CoffeesController = /** @class */ (function () {
     ], CoffeesController.prototype, "update", null);
     __decorate([
         (0, common_1.Delete)(':id'),
+        openapi.ApiResponse({ status: 200, type: require("../-coffees/entities/coffee.entity").Coffee }),
         __param(0, (0, common_1.Param)('id')),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [String]),

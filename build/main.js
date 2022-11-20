@@ -42,9 +42,10 @@ var app_module_1 = require("./app.module");
 var http_exception_filter_1 = require("./common/filters/http-exception.filter");
 var wrap_response_interceptor_1 = require("./common/interceptors/wrap-response.interceptor");
 var timeout_interceptor_1 = require("./common/interceptors/timeout.interceptor");
+var swagger_1 = require("@nestjs/swagger");
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function () {
-        var app, e_1;
+        var app, options, document, e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, core_1.NestFactory.create(app_module_1.AppModule)];
@@ -60,6 +61,13 @@ function bootstrap() {
                     }));
                     app.useGlobalFilters(new http_exception_filter_1.HttpExceptionFilter());
                     app.useGlobalInterceptors(new wrap_response_interceptor_1.WrapResponseInterceptor(), new timeout_interceptor_1.TimeoutInterceptor());
+                    options = new swagger_1.DocumentBuilder()
+                        .setTitle('Iluvcoffee')
+                        .setDescription('Coffee application')
+                        .setVersion('1.0')
+                        .build();
+                    document = swagger_1.SwaggerModule.createDocument(app, options);
+                    swagger_1.SwaggerModule.setup('api', app, document);
                     _a.label = 2;
                 case 2:
                     _a.trys.push([2, 4, , 5]);

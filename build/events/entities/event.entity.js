@@ -10,10 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Event = void 0;
+var openapi = require("@nestjs/swagger");
 var typeorm_1 = require("typeorm");
 var Event = /** @class */ (function () {
     function Event() {
     }
+    Event._OPENAPI_METADATA_FACTORY = function () {
+        return { id: { required: true, type: function () { return Number; } }, type: { required: true, type: function () { return String; } }, name: { required: true, type: function () { return String; } }, payload: { required: true, type: function () { return Object; } } };
+    };
     __decorate([
         (0, typeorm_1.PrimaryGeneratedColumn)(),
         __metadata("design:type", Number)
