@@ -22,7 +22,9 @@ import { Public } from '../common/decorators/public.decorator';
 import { resolve } from 'path';
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 import { Protocol } from '../common/decorators/protocol.decorator';
+import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('coffees')
 @UsePipes(ValidationPipe)
 @Controller('coffees')
 export class CoffeesController {
@@ -33,6 +35,7 @@ export class CoffeesController {
     console.log('CoffeeController created');
   }
 
+  @ApiForbiddenResponse({ description: 'Forbidden.' })
   @Public()
   @Get()
   // async

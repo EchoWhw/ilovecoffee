@@ -24,6 +24,7 @@ var common_2 = require("@nestjs/common");
 var public_decorator_1 = require("../common/decorators/public.decorator");
 var parse_int_pipe_1 = require("../common/pipes/parse-int.pipe");
 var protocol_decorator_1 = require("../common/decorators/protocol.decorator");
+var swagger_1 = require("@nestjs/swagger");
 var CoffeesController = /** @class */ (function () {
     function CoffeesController(coffeesService, request) {
         this.coffeesService = coffeesService;
@@ -56,6 +57,7 @@ var CoffeesController = /** @class */ (function () {
         return this.coffeesService.remove(id);
     };
     __decorate([
+        (0, swagger_1.ApiForbiddenResponse)({ description: 'Forbidden.' }),
         (0, public_decorator_1.Public)(),
         (0, common_1.Get)()
         // async
@@ -101,6 +103,7 @@ var CoffeesController = /** @class */ (function () {
         __metadata("design:returntype", void 0)
     ], CoffeesController.prototype, "remove", null);
     CoffeesController = __decorate([
+        (0, swagger_1.ApiTags)('coffees'),
         (0, common_1.UsePipes)(common_2.ValidationPipe),
         (0, common_1.Controller)('coffees'),
         __param(1, (0, common_1.Inject)(core_1.REQUEST)),
