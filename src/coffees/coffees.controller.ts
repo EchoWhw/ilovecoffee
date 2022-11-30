@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Inject,
+  Module,
   Param,
   Patch,
   Post,
@@ -19,7 +20,6 @@ import { REQUEST } from '@nestjs/core';
 import { Request } from 'express';
 import { ValidationPipe } from '@nestjs/common';
 import { Public } from '../common/decorators/public.decorator';
-import { resolve } from 'path';
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 import { Protocol } from '../common/decorators/protocol.decorator';
 import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';

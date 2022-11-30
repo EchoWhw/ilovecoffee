@@ -17,6 +17,9 @@ var CoffeeRatingService = /** @class */ (function () {
         this.coffeesService = coffeesService;
     }
     CoffeeRatingService = __decorate([
+        (0, common_1.Module)({
+            imports: [_coffees_service_1.CoffeesService],
+        }),
         (0, common_1.Injectable)(),
         __metadata("design:paramtypes", [_coffees_service_1.CoffeesService])
     ], CoffeeRatingService);
